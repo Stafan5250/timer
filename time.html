@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" href="time.css">
+</head>
+
+<body>
+    <div class="time-wrap zoomIn animated">
+        <div class="time-base bounceInUp animated"></div>
+        <div class="time-belt bounceInUp animated"></div>
+        <div class="time-wheel bounceInLeft animated"></div>
+        <div class="time-clock bounceInUp animated">
+            <div class="indicators">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="letters">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="arrows">
+                <div class="hour"></div>
+                <div class="minute"></div>
+                <div class="second"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+    $(function() {
+        Time.init();
+    });
+
+    Time = {
+        counter: 0,
+        init: function(){
+            var seconds = new Date().getSeconds();
+            var mins = new Date().getMinutes();
+            var hours = new Date().getHours();
+            setInterval(function() {
+                seconds += 1;
+                var sdegree = seconds * 6;
+                var mdegree = (mins + (seconds / 60)) * 6;
+                var hdegree = (hours + (mins / 60) + (seconds / 3600)) * 30;
+                var srotate = "rotate(" + sdegree + "deg)";
+                var mrotate = "rotate(" + mdegree + "deg)";
+                var hrotate = "rotate(" + hdegree + "deg)";
+                $('.second').css({ "-moz-transform": srotate, "-webkit-transform": srotate });
+                $('.minute').css({ "-moz-transform": mrotate, "-webkit-transform": mrotate });
+                $('.hour').css({ "-moz-transform": hrotate, "-webkit-transform": hrotate });
+            }, 1000);
+        }
+    }
+    </script>
+</body>
+
+</html>
